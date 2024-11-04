@@ -28,3 +28,39 @@ This project explores Concept Bottleneck Models (CBMs) through a simple CNN arch
 python -m venv cbm_env  # Create virtual environment
 source cbm_env/bin/activate  # Activate it on macOS/Linux
 cbm_env\Scripts\activate  # Activate it on Windows
+```
+
+#### Install the required dependencies:
+```bash
+pip install -r requirements.txt
+```
+
+
+### 2. Data Preparation
+The dataset will automatically be downloaded and saved in the correct structure under `data/MNIST/raw/` when you run the script. If the files already exist, they will be used directly.
+
+### 3. Run the Training and Testing Script
+Navigate to the project directory and run the training script:
+
+```bash
+cd ConceptBottleneck-GUI-Experiment  # Navigate to the project directory
+python scripts/run.py  # Train and test the model
+```
+
+#### Visualizing the Results
+Our goal is to visualize the concept activations and concept contributions. I manually created 7 concept labels for this Concept Bottleneck layer. The contibution outputs is shown here:
+
+![Project Structure](images/contributions.png)
+
+### Project Goal
+Now that we have a basic foundation of CBL. Our project addresses to develop a user-friendly GUI that automates much of the technical complexity involved in integrating and interacting with CBLs in LLMs. Weng et al. (2024) developed an automated pipeline to integrate CBLs into LLMs, but it  requires users to run technical scripts. The GUI is designed with five main interfaces that guide the user through the process of integrating a CBL into an LLM, from dataset selection to model experimentation and history tracking.
+
+
+The proposed GUI will use React for the frontend and Python for the backend. React will handle the dynamic UI, while Python will run ML tasks using PyTorch. When a user clicks a button, React will send a request to the Python backend, triggering a script. The backend will process the request, and React will update the UI with the results.
+
+
+
+
+
+
+
