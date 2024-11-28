@@ -25,7 +25,13 @@ def train_model():
 
         # simulate running the training script
 
-        subprocess.run(["python", "train_model.py"], check=True)
+        # subprocess.run(["python", "train_model.py"], check=True)
+        # commands = [
+        #     ["python", "get_concept_labels.py"],
+        #     # ["python", "train_CBL.py --automatic_concept_correction"],
+        #     # ["python", ""]
+        # ]   
+        subprocess.run(["python","get_concept_labels.py"])
         return jsonify({"message": f"Training completed on {hardware}!"})
 
     except subprocess.CalledProcessError as e:
