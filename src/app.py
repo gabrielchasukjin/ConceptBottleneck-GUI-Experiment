@@ -24,10 +24,10 @@ def train_model():
             return jsonify({"error": "Invalid hardware option"}), 400
 
         subprocess.run(["python","get_concept_labels.py"])
-        subprocess.run("python", "train_CBL.py --automatic_concept_correction")
+        subprocess.run(["python", "train_CBL.py", "--automatic_concept_correction"])
         # Will eventually configure this last process to pick the best epoch model
         # This will require us to save the accuracies when the final layer is being trained
-        subprocess.run("python", "train_FL.py --cbl_path mpnet_acs/SetFit_sst2/roberta_cbm/cbl_acc_epoch_8.pt")
+        subprocess.run(["python", "train_FL.py", "--cbl_path", "mpnet_acs/SetFit_sst2/roberta_cbm/cbl_acc_epoch_8.pt"])
 
         return jsonify({"message": f"Training completed on {hardware}!"})
 
