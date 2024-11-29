@@ -1,6 +1,8 @@
 import psutil
 import platform
 import torch
+import json
+
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import subprocess
@@ -35,26 +37,32 @@ def train_model():
         return jsonify({"error": f"Training failed: {e.stderr}"}), 500
 
 
-# Test endpoint
 @app.route("/test", methods=["POST"])
 def test_model():
     data = request.json
     input_text = data.get("input", "")
     if not input_text:
         return jsonify({"error": "Input text is required"}), 400
+
     try:
+        # Call the test_model.py script with the input text
+        result = subprocess.run(
+            ["python", "test_model.py", input_text],
+            capture_output=True,
+            text=True
+        )
 
-        # simulate classification and concept activation
-        classification = "positive" if "good" in input_text else "negative"
+        # Check for errors during script execution
+        if result.returncode != 0:
+            print(f"Error running test_model.py: {result.stderr}")  # Log the error
+            return jsonify({"error": f"Error in test_model.py: {result.stderr}"}), 500
 
-        activations = {
-            "Concept A": 0.8,
-            "Concept B": 0.5,
-            "Concept C": 0.3,
-            "Concept D": 0.9,
-        }
-        return jsonify({"classification": classification, "activations": activations})
+        # Parse the JSON response from test_model.py
+        response_data = json.loads(result.stdout)
+        return jsonify(response_data)
+
     except Exception as e:
+        print(f"Exception in /test endpoint: {str(e)}")  # Log any exceptions
         return jsonify({"error": str(e)}), 500
 
 

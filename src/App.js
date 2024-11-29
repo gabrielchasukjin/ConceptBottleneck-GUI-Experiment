@@ -12,7 +12,6 @@ import {
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
 
-// Register Chart.js components
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
 function App() {
@@ -43,7 +42,12 @@ function App() {
         input: inputText,
       });
       setClassificationResult(response.data.classification);
-      setActivations(response.data.activations);
+
+      const activationsObj = response.data.top_concepts.reduce((acc, concept) => {
+        acc[concept.concept] = concept.activation;
+        return acc;
+      }, {});
+      setActivations(activationsObj);
     } catch (error) {
       console.error("Classify Error:", error.response?.data || error.message);
       alert("Classification failed. Check the backend logs.");
@@ -56,7 +60,6 @@ function App() {
 
   return (
     <Box display="flex" flexDirection="column" alignItems="center" padding="20px">
-      {/* Title Section */}
       <Box
         display="flex"
         justifyContent="flex-start"
@@ -69,7 +72,6 @@ function App() {
         </Typography>
       </Box>
 
-      {/* Top Section with Three Boxes */}
       <Box
         display="flex"
         justifyContent="space-between"
@@ -77,7 +79,6 @@ function App() {
         width="80%"
         marginBottom="40px"
       >
-        {/* Hardware Option Box */}
         <Box
           display="flex"
           flexDirection="column"
@@ -89,11 +90,7 @@ function App() {
           height="170px"
           margin="20px"
         >
-          <Typography
-            variant="h6"
-            marginBottom="10px"
-            style={{ textAlign: "center", width: "100%" }}
-          >
+          <Typography variant="h6" marginBottom="10px" style={{ textAlign: "center" }}>
             Select Hardware
           </Typography>
           <Button
@@ -111,7 +108,6 @@ function App() {
           </Button>
         </Box>
 
-        {/* Train Model Box */}
         <Box
           display="flex"
           flexDirection="column"
@@ -123,11 +119,7 @@ function App() {
           height="170px"
           margin="20px"
         >
-          <Typography
-            variant="h6"
-            marginBottom="10px"
-            style={{ textAlign: "center", width: "100%" }}
-          >
+          <Typography variant="h6" marginBottom="10px" style={{ textAlign: "center" }}>
             Train CB Layer
           </Typography>
           <Button
@@ -140,7 +132,6 @@ function App() {
           </Button>
         </Box>
 
-        {/* Classify Input Box */}
         <Box
           display="flex"
           flexDirection="column"
@@ -152,11 +143,7 @@ function App() {
           height="170px"
           margin="20px"
         >
-          <Typography
-            variant="h6"
-            marginBottom="10px"
-            style={{ textAlign: "center", width: "100%" }}
-          >
+          <Typography variant="h6" marginBottom="10px" style={{ textAlign: "center" }}>
             Classify Input
           </Typography>
           <TextField
@@ -181,7 +168,6 @@ function App() {
         </Box>
       </Box>
 
-      {/* Bar Chart Section */}
       {Object.keys(activations).length > 0 && (
         <Box
           display="flex"
@@ -215,17 +201,11 @@ function App() {
                 responsive: true,
                 maintainAspectRatio: false,
                 plugins: {
-                  legend: {
-                    display: true,
-                  },
+                  legend: { display: true },
                 },
                 scales: {
-                  x: {
-                    beginAtZero: true,
-                  },
-                  y: {
-                    beginAtZero: true,
-                  },
+                  x: { beginAtZero: true },
+                  y: { beginAtZero: true },
                 },
               }}
             />
