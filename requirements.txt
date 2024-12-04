@@ -1,5 +1,9 @@
-torch==1.10.0
-torchvision==0.11.1
-matplotlib==3.4.3
-seaborn==0.11.2
-numpy==1.21.2
+Flask==2.2.2
+Flask-Cors==3.0.10
+torch==2.5.1
+torchaudio==2.5.1
+torchvision==0.20.1
+transformers==4.46.3
+datasets==3.1.0
+peft==0.13.2
+psutil==6.1.0
