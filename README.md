@@ -63,7 +63,6 @@ Navigate to the src folder:
 cd src
 ```
 #### Run the Flask backend server:
-bash
 ```bash
 python app.py
 ```
