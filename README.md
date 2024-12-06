@@ -7,8 +7,6 @@ Our GUI simplifies the process, enabling users of all skills levels to visualize
 
 ![CB LLM Framework](fig/cbllm.png)
 
-
-## Project Structure
 ## Project Structure
 
 - `src/`: Core source code for the project, including:  
@@ -82,8 +80,6 @@ Currently, we are focused on developing a minimal viable product (MVP) that capt
 
 ### Home Page MVP 
 The home page of the CBM-GUI Minimum Viable Product (MVP) allows users to select hardware, train the Concept Bottleneck Layer (CBL), and classify inputs.
-
-![CB LLM Framework](fig/homepage.png)
 
 Users can choose to train the CBL layer on either local hardware or the DSMPL UCSD server. ***Currently the backend defaults to local hardward.*** Once the hardware is selected, users can click "Train" to start the training process. Training duration varies based on the hardware, typically taking between 5 to 45 minutes.
 
