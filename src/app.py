@@ -66,6 +66,53 @@ def test_model():
         return jsonify({"error": str(e)}), 500
 
 
+# Add new hardware info endpoint
+@app.route("/hardware-info", methods=["GET"])
+def get_hardware_info():
+    try:
+        # Get CPU info
+        cpu_info = platform.processor()
+        if not cpu_info:  # Fallback if processor() returns empty string
+            cpu_info = platform.machine()
+        
+        # Get RAM info (in GB, rounded to 2 decimal places)
+        ram_gb = round(psutil.virtual_memory().total / (1024.0 ** 3), 2)
+        ram_info = f"{ram_gb}GB"
+        
+        # Get GPU info
+        gpu_info = "None"
+        if platform.system() == "Darwin" and platform.processor() == "arm":
+            # For Apple Silicon Macs
+            gpu_info = "Apple Integrated GPU"
+            if "M1" in cpu_info:
+                gpu_info = "Apple M1 GPU"
+            elif "M2" in cpu_info:
+                gpu_info = "Apple M2 GPU"
+            elif "M3" in cpu_info:
+                gpu_info = "Apple M3 GPU"
+        elif torch.cuda.is_available():
+            # For NVIDIA GPUs
+            gpu_info = torch.cuda.get_device_name(0)
+            try:
+                gpu_mem = torch.cuda.get_device_properties(0).total_memory / (1024.0 ** 3)
+                gpu_info += f" ({round(gpu_mem, 2)}GB)"
+            except:
+                pass
+
+        return jsonify({
+            'cpu': cpu_info,
+            'ram': ram_info,
+            'gpu': gpu_info
+        })
+    except Exception as e:
+        print(f"Error getting hardware info: {str(e)}")
+        return jsonify({
+            'cpu': 'Unknown',
+            'ram': 'Unknown',
+            'gpu': 'Unknown'
+        }), 500
+
+
 if __name__ == "__main__":
     app.run(debug=True, port=5050)
 

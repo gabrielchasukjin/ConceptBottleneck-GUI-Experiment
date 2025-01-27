@@ -1,3 +1,19 @@
+:root {
+  --primary-bg: #ffffff;
+  --secondary-bg: #f8f9fa;
+  --border-color: #e9ecef;
+  --text-primary: #212529;
+  --text-secondary: #6c757d;
+  --accent-color: #007bff;
+  --box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+body {
+  background-color: var(--secondary-bg);
+  margin: 0;
+  padding: 0;
+}
+
 .App {
   text-align: center;
 }
@@ -35,4 +51,270 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  min-height: 100vh;
+  background-color: var(--secondary-bg);
+}
+
+.header-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 20px;
+  padding: 20px;
+  background-color: var(--primary-bg);
+  box-shadow: var(--box-shadow);
+}
+
+.app-title {
+  font-weight: 600;
+  font-size: 18px;
+  color: var(--text-primary);
+  letter-spacing: 0.5px;
+}
+
+.main-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 90%;
+  margin-bottom: 40px;
+  gap: 40px;
+}
+
+.section-box {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: 50%;
+  padding: 32px;
+  background-color: var(--primary-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  height: auto;
+  min-height: 170px;
+  box-shadow: var(--box-shadow);
+  transition: transform 0.2s ease;
+}
+
+.section-box:hover {
+  transform: translateY(-2px);
+}
+
+.section-title {
+  margin-bottom: 20px;
+  text-align: center;
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.chart-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 70%;
+  padding: 24px;
+  background-color: var(--primary-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  margin-top: 20px;
+  box-shadow: var(--box-shadow);
+}
+
+.chart-box {
+  width: 100%;
+  height: 400px;
+  padding: 16px;
+}
+
+.hardware-button {
+  margin-bottom: 12px;
+  width: 100%;
+}
+
+/* Style for MUI components */
+.MuiButton-root {
+  text-transform: none !important;
+  box-shadow: none !important;
+  font-weight: 500 !important;
+}
+
+.MuiTextField-root {
+  background-color: var(--primary-bg);
+}
+
+/* Remove default App styles that aren't needed */
+.App-logo, .App-header, .App-link {
+  display: none;
+}
+
+.option-label {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  color: var(--text-primary);
+  align-self: flex-start;
+}
+
+.options-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.option-button {
+  flex: 1 1 calc(50% - 10px);
+  min-width: 120px !important;
+}
+
+.toggle-option {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.toggle-button {
+  width: 100%;
+}
+
+.train-button {
+  margin-top: 30px !important;
+  width: 100% !important;
+  height: 48px;
+  font-size: 1.1rem !important;
+  opacity: 1 !important;
+  transition: all 0.3s ease !important;
+  background-color: #9e9e9e !important; /* Grey by default */
+  color: white !important;
+}
+
+.train-button:disabled {
+  background-color: #9e9e9e !important;
+  opacity: 0.7 !important;
+}
+
+.train-button:not(:disabled) {
+  background-color: var(--accent-color) !important;
+  opacity: 1 !important;
+}
+
+/* Style for selected buttons */
+.MuiButton-contained {
+  background-color: var(--accent-color) !important;
+  color: white !important;
+}
+
+/* Add hover effect for buttons */
+.option-button:hover, .toggle-button:hover {
+  transform: translateY(-1px);
+}
+
+.right-column {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 50%;
+}
+
+.info-box, .right-column .section-box {
+  background-color: var(--primary-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: var(--box-shadow);
+  height: 100px;
+  width: 100%; /* Ensure both boxes take full width of right column */
+  display: flex;
+  flex-direction: column;
+}
+
+/* Remove duplicate properties from individual classes */
+.right-column .section-box {
+  justify-content: space-between;
+}
+
+/* Adjust the right column width to be consistent */
+.right-column {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 50%;
+}
+
+/* Ensure text doesn't overflow */
+.info-text {
+  color: var(--text-secondary);
+  line-height: 1.6 !important;
+  font-size: 0.9rem !important;
+  overflow-wrap: break-word;
+}
+
+.info-label {
+  color: var(--text-primary);
+  font-weight: 600 !important;
+  margin-bottom: 8px !important;
+}
+
+.classify-button {
+  background-color: #9e9e9e !important; /* Grey by default */
+  color: white !important;
+  opacity: 1 !important;
+  transition: all 0.3s ease !important;
+}
+
+.classify-button:disabled {
+  background-color: #9e9e9e !important;
+  opacity: 0.7 !important;
+}
+
+.classify-button:not(:disabled) {
+  background-color: var(--accent-color) !important;
+  opacity: 1 !important;
+}
+
+/* Update the hardware info styles */
+.hardware-info-container {
+  width: 90%;
+  margin-bottom: 30px;
+  display: flex;
+  justify-content: center;
+}
+
+.hardware-info {
+  display: flex;
+  gap: 30px;
+  padding: 8px 20px;
+  background-color: var(--secondary-bg);
+  border-radius: 6px;
+}
+
+.hardware-text {
+  font-size: 0.75rem !important;
+  white-space: nowrap;
+  font-weight: 400 !important;
+}
+
+.hardware-label {
+  color: var(--text-secondary);
+}
+
+.hardware-value {
+  color: #28a745;
+}
+
+/* Remove the old hardware info from the Classify Input box */
+.right-column .section-box .hardware-info {
+  display: none;
 }
